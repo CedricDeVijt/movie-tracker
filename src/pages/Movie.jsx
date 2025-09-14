@@ -1,33 +1,50 @@
 import {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {getMovieDetails} from "../services/tmdb.js";
+import {motion} from "framer-motion";
 
-const posterBaseURL = "https://image.tmdb.org/t/p/w1920"
+
+const posterBaseURL = "https://image.tmdb.org/t/p/w500"
 
 function Movie() {
     const {id} = useParams();
     const [movie, setMovie] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function fetchMovieDetails() {
-            const data = await getMovieDetails(id);
-            setMovie(data);
+            setError(null);
+            try {
+                const data = await getMovieDetails(id);
+                if (!data) {
+                    setMovie(null);
+                    setError('not_found');
+                } else {
+                    setMovie(data);
+                }
+            } catch (err) {
+                setError(err.message || 'fetch_error');
+                setMovie(null);
+            }
         }
 
         fetchMovieDetails();
     }, [id]);
 
 
-    if (!movie) return <p>Movie not found</p>;
+    if (!movie) return <p></p>;
 
     return (
         <div className="container mx-auto p-6 flex flex-col md:flex-row gap-8">
             {/* Poster Section */}
             <div className="flex-shrink-0 md:w-1/3">
-                <img
+                <motion.img
                     className="w-full rounded-2xl shadow-md"
                     src={posterBaseURL + movie.poster_path}
                     alt="Movie Poster"
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    transition={{duration: 0.8}}
                 />
             </div>
 
@@ -35,11 +52,10 @@ function Movie() {
             <div className="flex-1 p-4">
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">{movie.title} {
                     [...Array(5)].map((_, i) => {
-                        // Convert rating from 0-100 to 0-5 scale
                         const starValue = Math.round(movie.vote_average * 10) / 20;
                         return (
                             <span key={i} className="text-yellow-400 text-3xl">
-                                {i < Math.floor(starValue) ? "★" : "☆"}
+                                {i < Math.round(starValue) ? "★" : "☆"}
                             </span>
                         );
                     })
@@ -65,9 +81,7 @@ function Movie() {
                     Add to Watchlist
                 </button>
             </div>
-
         </div>
-
     );
 }
 
