@@ -20,7 +20,10 @@ export const searchMovies = async (query) => {
 
 export const getMovieDetails = async (id) => {
     const response = await axios.get(`${BASE_URL}/movie/${id}`, {
-        params: {api_key: API_KEY}
+        headers: {
+            "accept": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        }
     });
     return response.data;
 };
@@ -33,9 +36,6 @@ export const getPopularMovies = async () => {
             "Authorization": `Bearer ${API_KEY}`
         }
     });
-
-    console.log(response.data.results)
-
     return response.data.results;
 }
 
@@ -46,9 +46,6 @@ export const getTopRatedMovies = async () => {
             "Authorization": `Bearer ${API_KEY}`
         }
     });
-
-    console.log(response.data.results)
-
     return response.data.results;
 }
 
@@ -60,8 +57,5 @@ export const getUpcomingMovies = async () => {
             "Authorization": `Bearer ${API_KEY}`
         }
     });
-
-    console.log(response.data.results)
-
     return response.data.results;
 }

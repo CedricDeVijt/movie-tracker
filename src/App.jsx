@@ -4,6 +4,7 @@ import './App.css'
 import Home from "./pages/Home.jsx";
 import Seen from "./pages/Seen.jsx";
 import Watchlist from "./pages/Watchlist.jsx";
+import Movie from "./pages/Movie.jsx";
 
 import Navbar from "./components/Navbar.jsx";
 
@@ -15,6 +16,7 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/seen" element={<Seen/>}/>
                 <Route path="/watchlist" element={<Watchlist/>}/>
+                <Route path="/movie/:id" element={<Movie/>}/>
             </Routes>
         </Router>
     );
