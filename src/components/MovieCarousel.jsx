@@ -29,7 +29,7 @@ function MovieCarousel({ movies }) {
       </button>
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto space-x-4 scrollbar-hide px-10"
+        className="flex overflow-y-hidden overflow-x-auto space-x-4 scrollbar-hide px-10"
         style={{ scrollBehavior: "smooth" }}
       >
         {movies.map((movie, idx) => (
