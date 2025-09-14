@@ -1,7 +1,11 @@
+import MovieGrid from '../components/MovieGrid';
+
 function Watched() {
 
+    let movieIDs = [755898, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031];
+
     return (
-        <p>Watched Page</p>
+        <MovieGrid movieIDs={movieIDs}/>
     );
 }
 
