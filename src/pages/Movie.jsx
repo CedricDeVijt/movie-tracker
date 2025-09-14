@@ -7,20 +7,17 @@ const posterBaseURL = "https://image.tmdb.org/t/p/w1920"
 function Movie() {
     const {id} = useParams();
     const [movie, setMovie] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchMovieDetails() {
             const data = await getMovieDetails(id);
             setMovie(data);
-            setLoading(false)
         }
 
         fetchMovieDetails();
     }, [id]);
 
 
-    if (loading) return <p>Loading...</p>;
     if (!movie) return <p>Movie not found</p>;
 
     return (
@@ -36,10 +33,21 @@ function Movie() {
 
             {/* Details Section */}
             <div className="flex-1 p-4">
-                <h1 className="text-4xl md:text-5xl font-bold mb-6">{movie.title}</h1>
+                <h1 className="text-4xl md:text-5xl font-bold mb-6">{movie.title} {
+                    [...Array(5)].map((_, i) => {
+                        // Convert rating from 0-100 to 0-5 scale
+                        const starValue = Math.round(movie.vote_average * 10) / 20;
+                        return (
+                            <span key={i} className="text-yellow-400 text-3xl">
+                                {i < Math.floor(starValue) ? "★" : "☆"}
+                            </span>
+                        );
+                    })
+                }</h1>
                 <p className="mb-4">{movie.overview}</p>
                 <p className="mb-2">Release Date: {movie.release_date}</p>
-                <p className="mb-2">Rating: {Math.round(movie.vote_average * 10)}</p>
+                <p className="mb-2">Rating: {Math.round(movie.vote_average * 10) / 10}</p>
+
                 <p className="mb-2">Genres: {movie.genres.map(g => g.name).join(", ")}</p>
                 <p className="mb-2">Runtime: {movie.runtime} minutes</p>
                 {movie.budget > 0 && (
@@ -48,7 +56,16 @@ function Movie() {
                 {movie.revenue > 0 && (
                     <p className="mb-2">Revenue: ${movie.revenue.toLocaleString()}</p>
                 )}
+
+
+                <button className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 margin-right-4 mr-4">
+                    Add to Watched
+                </button>
+                <button className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    Add to Watchlist
+                </button>
             </div>
+
         </div>
 
     );
