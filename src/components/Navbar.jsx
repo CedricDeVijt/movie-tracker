@@ -25,12 +25,12 @@ function Navbar({onSearch}) {
                         Home
                     </NavLink>
                     <NavLink
-                        to="/seen"
+                        to="/watched"
                         className={({isActive}) =>
                             `text-white hover:text-gray-300 ${isActive ? 'font-bold italic' : ''}`
                         }
                     >
-                        Seen
+                        Watched
                     </NavLink>
                     <NavLink
                         to="/watchlist"
