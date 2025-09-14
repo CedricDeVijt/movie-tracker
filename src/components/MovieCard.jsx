@@ -17,7 +17,7 @@ function MovieCard({movie}) {
                 <div className="p-2 bg-white">
                     <div className="flex items-center text-sm text-gray-600 mb-1">
           <span className="bg-gray-200 rounded-full px-2 py-0.5 text-xs">
-            {movie.vote_average ? `${movie.vote_average * 10}%` : "N/A"}
+            {movie.vote_average ? `${Math.round(movie.vote_average * 10)}%` : "N/A"}
           </span>
                     </div>
                     <a
