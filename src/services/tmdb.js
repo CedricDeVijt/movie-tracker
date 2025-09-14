@@ -38,3 +38,30 @@ export const getPopularMovies = async () => {
 
     return response.data.results;
 }
+
+export const getTopRatedMovies = async () => {
+    const response = await axios.get(`${BASE_URL}/movie/top_rated`, {
+        headers: {
+            "accept": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        }
+    });
+
+    console.log(response.data.results)
+
+    return response.data.results;
+}
+
+
+export const getUpcomingMovies = async () => {
+    const response = await axios.get(`${BASE_URL}/movie/upcoming`, {
+        headers: {
+            "accept": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        }
+    });
+
+    console.log(response.data.results)
+
+    return response.data.results;
+}
