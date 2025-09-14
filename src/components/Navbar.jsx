@@ -33,12 +33,12 @@ function Navbar({onSearch}) {
                         Seen
                     </NavLink>
                     <NavLink
-                        to="/wishlist"
+                        to="/watchlist"
                         className={({isActive}) =>
                             `text-white hover:text-gray-300 ${isActive ? 'font-bold italic' : ''}`
                         }
                     >
-                        Wishlist
+                        Watchlist
                     </NavLink>
                 </div>
 

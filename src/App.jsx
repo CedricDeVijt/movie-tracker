@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css'
 import Home from "./pages/Home.jsx";
 import Seen from "./pages/Seen.jsx";
-import Wishlist from "./pages/Wishlist.jsx";
+import Watchlist from "./pages/Watchlist.jsx";
 
 import Navbar from "./components/Navbar.jsx";
 
@@ -14,7 +14,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/seen" element={<Seen/>}/>
-                <Route path="/wishlist" element={<Wishlist/>}/>
+                <Route path="/watchlist" element={<Watchlist/>}/>
             </Routes>
         </Router>
     );
