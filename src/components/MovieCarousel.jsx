@@ -1,4 +1,3 @@
-// src/components/MovieCarousel.jsx
 import {useRef} from "react";
 import MovieCard from "./MovieCard.jsx";
 
@@ -15,6 +14,10 @@ function MovieCarousel({movies}) {
         }
     };
 
+    if (movies.length === 0) {
+        return <></>
+    }
+
     return (
         <div className="relative w-full">
             <button
@@ -30,7 +33,7 @@ function MovieCarousel({movies}) {
                 style={{scrollBehavior: "smooth"}}
             >
                 {movies.map((movie, idx) => (
-                    <MovieCard key={movie.id || idx} movie={movie}/>
+                    <MovieCard key={movie.id || idx} movie={movie} index={idx}/>
                 ))}
             </div>
             <button

@@ -1,12 +1,22 @@
 import {Link} from 'react-router-dom';
+import {useEffect, useState} from "react";
 
 const posterBaseURL = "https://image.tmdb.org/t/p/w500"
 
-function MovieCard({movie}) {
+function MovieCard({movie, index = 0}) {
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const t = setTimeout(() => setVisible(true), index * 5);
+        return () => clearTimeout(t);
+    }, [index]);
 
     return (
-        <div className="p-1">
-            <div className="relative group w-52 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition">
+        <div
+            className={`p-1 transition-all duration-500 ease-out transform ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            style={{transitionDelay: `${index * 70}ms`}}
+        >
+            <div className="relative group w-52 rounded-2xl overflow-hidden shadow-md hover:shadow-lg">
                 {/* Poster */}
                 <Link to={`/movie/${movie.id}`} className="block">
                     <img

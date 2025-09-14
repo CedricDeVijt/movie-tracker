@@ -38,6 +38,10 @@ function Home() {
     }, []);
 
 
+    if (popularMovies.length === 0 || topRatedMovies.length === 0 || upcomingMovies.length === 0) {
+        return <></>;
+    }
+
     return (
         <>
             <div>
