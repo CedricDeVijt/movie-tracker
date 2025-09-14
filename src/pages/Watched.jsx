@@ -1,12 +1,11 @@
-import MovieGrid from '../components/MovieGrid';
+import MovieGrid from "../components/MovieGrid";
+import useLocalList from "../hooks/useLocalList";
 
 function Watched() {
+  const initial = [];
+  const { list: movieIDs } = useLocalList("watchedMovies", { initial });
 
-    let movieIDs = [755898, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031, 1311031];
-
-    return (
-        <MovieGrid movieIDs={movieIDs}/>
-    );
+  return <MovieGrid movieIDs={movieIDs} />;
 }
 
 export default Watched;
