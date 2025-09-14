@@ -1,10 +1,15 @@
-import { searchMovies } from "../services/tmdb";
 import SearchBar from "./SearchBar";
 
 import { NavLink, useNavigate } from "react-router-dom";
 
-function Navbar({ onSearch }) {
+function Navbar() {
   const navigate = useNavigate();
+
+  const handleSearch = (query) => {
+    if (query.trim()) {
+      navigate(`/search?query=${encodeURIComponent(query)}`);
+    }
+  };
 
   return (
     <nav className="bg-gray-800 p-4 shadow-md">
@@ -42,17 +47,7 @@ function Navbar({ onSearch }) {
           </NavLink>
         </div>
 
-        <SearchBar
-          onSearch={async (term) => {
-            try {
-              const results = await searchMovies(term);
-              onSearch(results);
-              navigate("/");
-            } catch (error) {
-              onSearch([]);
-            }
-          }}
-        />
+        <SearchBar onSearch={handleSearch} />
       </div>
     </nav>
   );

@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import Watched from "./pages/Watched.jsx";
 import Watchlist from "./pages/Watchlist.jsx";
 import Movie from "./pages/Movie.jsx";
+import SearchResult from "./pages/SearchResult.jsx";
 
 import Navbar from "./components/Navbar.jsx";
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/watched" element={<Watched />} />
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/movie/:id" element={<Movie />} />
+        <Route path="/search" element={<SearchResult />} />
       </Routes>
     </Router>
   );
