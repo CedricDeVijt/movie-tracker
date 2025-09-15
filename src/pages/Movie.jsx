@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMovieDetails } from "../services/tmdb.js";
-import useLocalList from "../hooks/useLocalList.js";
 import MovieDetail from "../components/MovieDetail.jsx";
+import useMovieList from "../hooks/useMovieList.js";
+import { getMovieDetails } from "../services/tmdb.js";
 
 function Movie() {
   const { id } = useParams();
@@ -10,34 +10,11 @@ function Movie() {
   const [_, setError] = useState(null);
 
   const {
-    add: addWatched,
-    has: hasWatched,
-    remove: removeWatched,
-  } = useLocalList("watchedMovies", { initial: [] });
-  const {
-    add: addWatchlist,
-    has: hasInWatchlist,
-    remove: removeFromWatchlist,
-  } = useLocalList("watchlistMovies", { initial: [] });
-
-  function handleToggleWatched() {
-    if (hasWatched(Number(id))) {
-      removeWatched(Number(id));
-    } else {
-      addWatched(Number(id));
-      if (hasInWatchlist(Number(id))) {
-        removeFromWatchlist(Number(id));
-      }
-    }
-  }
-
-  function handleToggleWatchlist() {
-    if (hasInWatchlist(Number(id))) {
-      removeFromWatchlist(Number(id));
-    } else {
-      addWatchlist(Number(id));
-    }
-  }
+    hasWatched,
+    hasInWatchlist,
+    handleToggleWatched,
+    handleToggleWatchlist,
+  } = useMovieList(id);
 
   useEffect(() => {
     async function fetchMovieDetails() {
