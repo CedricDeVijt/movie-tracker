@@ -11,17 +11,35 @@ import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (
-    <Router>
-      <Navbar onSearch={(results) => console.log(results)} />{" "}
-      {/* Update with real handler */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/watched" element={<Watched />} />
-        <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/movie/:id" element={<Movie />} />
-        <Route path="/search" element={<SearchResult />} />
-      </Routes>
-    </Router>
+    <div className="flex flex-col min-h-screen">
+      <Router>
+        <Navbar onSearch={(results) => console.log(results)} />
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/watched"
+              element={
+                <ProtectedRoute>
+                  <Watched />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/watchlist"
+              element={
+                <ProtectedRoute>
+                  <Watchlist />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/movie/:id" element={<Movie />} />
+            <Route path="/search" element={<SearchResult />} />
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
+    </div>
   );
 }
 
