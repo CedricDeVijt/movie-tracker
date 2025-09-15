@@ -1,15 +1,9 @@
 import { motion } from "framer-motion";
+import ListButtons from "./ListButtons.jsx";
 
 const posterBaseURL = "https://image.tmdb.org/t/p/w500";
 
-function MovieDetail({
-  movie,
-  id,
-  hasWatched,
-  hasInWatchlist,
-  handleToggleWatched,
-  handleToggleWatchlist,
-}) {
+function MovieDetail({ movie, id }) {
   return (
     <div className="container mx-auto p-6 flex flex-col md:flex-row gap-8">
       {/* Poster Section */}
@@ -51,30 +45,7 @@ function MovieDetail({
         {movie.revenue > 0 && (
           <p className="mb-2">Revenue: ${movie.revenue.toLocaleString()}</p>
         )}
-        <button
-          onClick={handleToggleWatched}
-          className={`px-3 py-2 rounded-md mr-4 ${
-            hasWatched(Number(id))
-              ? "bg-gray-200 text-blue-600 border border-blue-600 hover:bg-gray-300"
-              : "bg-blue-600 text-white hover:bg-blue-700"
-          }`}
-        >
-          {hasWatched(Number(id)) ? "Remove from Watched" : "Add to Watched"}
-        </button>
-        {!hasWatched(Number(id)) && (
-          <button
-            onClick={handleToggleWatchlist}
-            className={`px-3 py-2 rounded-md ${
-              hasInWatchlist(Number(id))
-                ? "bg-gray-200 text-blue-600 border border-blue-600 hover:bg-gray-300"
-                : "bg-blue-600 text-white hover:bg-blue-700"
-            }`}
-          >
-            {hasInWatchlist(Number(id))
-              ? "Remove from Watchlist"
-              : "Add to Watchlist"}
-          </button>
-        )}
+        <ListButtons id={id} />
       </div>
     </div>
   );
