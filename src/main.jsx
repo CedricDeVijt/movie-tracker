@@ -22,7 +22,7 @@ root.render(
     clientId={CLIENT_ID}
     authorizationParams={{
       redirect_uri: "http://localhost:5173",
-      scope: "openid profile email"
+      scope: "openid profile email",
     }}
     cacheLocation="localstorage" // Persist auth state in localStorage
     useRefreshTokens // Enable refresh tokens for better session management
