@@ -25,6 +25,9 @@ function Movie() {
       removeWatched(Number(id));
     } else {
       addWatched(Number(id));
+      if (hasInWatchlist(Number(id))) {
+        removeFromWatchlist(Number(id));
+      }
     }
   }
 
