@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import "./App.css";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+
 import Home from "./pages/Home.jsx";
 import Watched from "./pages/Watched.jsx";
 import Watchlist from "./pages/Watchlist.jsx";
 import Movie from "./pages/Movie.jsx";
 import SearchResult from "./pages/SearchResult.jsx";
-
-import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (
